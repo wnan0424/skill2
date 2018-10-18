@@ -3,7 +3,7 @@ Oct 17.2018
 
 #initialize:
 allData <- numeric()
-comp <- data.frame(id=numeric(), nobs=numeric())
+comp <- data.frame(id=numeric(length(1:4)), nobs=numeric(length(1:4)))
 
 # READING MULTIPLE CSV
 data <- read.csv(paste(directory,"/","0",i,".csv",sep = ""), header = TRUE)
@@ -13,3 +13,7 @@ data <- read.csv(paste(directory,"/","0",i,".csv",sep = ""), header = TRUE)
 mean(allData, na.rm=TRUE)
 data2 <- na.omit(data) 
 
+#data.frame 
+observedcase <- data.frame(id = numeric(length(id)), nobs= numeric(length(id)))
+observedcase[["id"]][count] <- i
+observedcase[["nobs"]][count] <- nobs
