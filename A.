@@ -12,8 +12,11 @@ data <- read.csv(paste(directory,"/","0",i,".csv",sep = ""), header = TRUE)
 #OMIT NA 
 mean(allData, na.rm=TRUE)
 data2 <- na.omit(data) 
+cor(a,b, use = "complete.obs")
 
 #data.frame 
 observedcase <- data.frame(id = numeric(length(id)), nobs= numeric(length(id)))
 observedcase[["id"]][count] <- i
 observedcase[["nobs"]][count] <- nobs
+complete1_subset <- subset(complete1, nobs > threshold)
+i in observations$id[observations$nobs > threshold]
