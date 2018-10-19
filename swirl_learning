@@ -1,0 +1,22 @@
+#*apply 
+dim(flags)
+[1] 194  30    # 194 rows, and 30 columns
+
+sapply(flag_shapes, range)  # the min and max value of each column
+
+sapply(flags, unique) # returns a list containing one vector of unique values for each column of the flags dataset
+
+vapply(flags, unique, numeric(1))  #  a safer than sapply : error if each element of the result to be NOT a numeric vector of length 1
+
+table(flags$landmass)
+ 1  2  3  4  5  6 
+31 17 35 52 39 20     # the number of every level 
+
+tapply(flags$animate, flags$landmass, mean)    
+  1         2         3         4         5         6 
+0.4193548 0.1764706 0.1142857 0.1346154 0.1538462 0.3000000     #to apply the mean function to the 'animate' variable separately
+                                                                for each of the six landmass groups. split your data
+                                                                into groups based on the value of some variable, then apply a
+                                                                function to each group.
+                                                                
+tapply(mtcars$mpg, mtcars$cyl, mean) == sapply(split(mtcars$mpg, mtcars$cyl), mean) == with(mtcars, tapply(mpg, cyl, mean))                                                                 
