@@ -1,5 +1,9 @@
 
-Oct 17.2018
+Oct 17.2018 
+#initialize:  
+# READING MULTIPLE CSV
+#OMIT NA 
+#data.frame 
 
 #initialize:
 allData <- numeric()
@@ -20,3 +24,14 @@ observedcase[["id"]][count] <- i
 observedcase[["nobs"]][count] <- nobs
 complete1_subset <- subset(complete1, nobs > threshold)
 i in observations$id[observations$nobs > threshold]
+
+Oct 19.2018 
+#pnorm 
+
+#pnorm 
+> pnorm(100, 50, lower.tail = F)
+[1] 0
+> pnorm(100,50)
+[1] 1
+> pnorm(50,50)
+[1] 0.5
