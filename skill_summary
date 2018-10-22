@@ -22,8 +22,15 @@ cor(a,b, use = "complete.obs")
 observedcase <- data.frame(id = numeric(length(id)), nobs= numeric(length(id)))
 observedcase[["id"]][count] <- i
 observedcase[["nobs"]][count] <- nobs
-complete1_subset <- subset(complete1, nobs > threshold)
 i in observations$id[observations$nobs > threshold]
+
+#subset 
+aa <- data.frame(a = 1:5,c =c("a","b","c","d","e"), b =c(21,23,444,1,20))
+bb <- subset.data.frame(aa, select = c (a,b))
+
+complete1_subset <- subset(complete1, nobs > threshold)
+  
+
 
 Oct 19.2018 
 #pnorm 
@@ -35,3 +42,24 @@ Oct 19.2018
 [1] 1
 > pnorm(50,50)
 [1] 0.5
+
+
+Oct 21.2018 
+#which
+#rank sort order 
+
+#which
+which(state_data[,11] == min(state_data[,11],na.rm = T))      #return the number of row of min 
+ 
+#order 
+aa <- data.frame(a = 1:5,c =c("a","b","c","d","e"), b =c(21,23,444,1,20))
+bb <- aa[order(aa$b, aa$b),]   #as a entire to order, first to order by the first and then order by the second  
+#sort
+> sort(aa$b)
+[1]   1  20  21  23 444
+#rank 
+> rank(aa$b)
+
+#clear 
+!!! every time try a new sample, clear the environment first. 
+[1] 3 4 5 1 2
