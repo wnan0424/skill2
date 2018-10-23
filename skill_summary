@@ -6,12 +6,41 @@
 #data.frame 
 #index
 #names 
+#download 
 
-#initialize: read, index, name 
+#download 
+if (!file.exists("data")){
+        dir.create("data")
+}
+fileurl <- "https:..."
+download.file(fileurl, destfile = "./data/aa.csv", method = "curl") #curl for Mac
+dateDownload <- data()
+ 
 url = "https://d396qusza40orc.cloudfront.net/rprog%2Fdata%2FProgAssignment3-data.zip"
 download.file(url, destfile = "temp")
 unzip("temp")
 unlink("temp")
+
+#initialize: read, index, name 
+
+# READING MULTIPLE CSV
+data <- read.csv(paste(directory,"/","0",i,".csv",sep = ""), header = TRUE)
+rates <- read.csv("outcome-of-care-measures.csv", colClasses = "character")
+data <- read.table("data.csv", sep = ",", header T, rownames, quote, nrow, skip, na.strings)  #don't read quotation mark 
+#read excel 
+library(xlsx)
+data <- read.xlsx("data.xlsx", header = T, SheetIndex = 1, colIndex =1:3, rowIndex = 1:5 )
+XLconnect 
+write.xlsx 
+#read xml
+library(XML)
+fileUrl <- "http://www.baidu.com/simple.xml"
+doc <- xmlTreeParse(fileUrl, useInternal = T)
+rootNode <- xmlRoot(doc)
+xmlName(rootNode) 
+names(rootNode)
+xpathSApply(rootNode, "//name". xmlValue)
+
 
 allData <- numeric()
 comp <- data.frame(id=numeric(length(1:4)), nobs=numeric(length(1:4)))
@@ -19,10 +48,6 @@ comp <- data.frame(id=numeric(length(1:4)), nobs=numeric(length(1:4)))
 #index
 index <- c(grep("^Hospital.*Death*", names(rates)))  # ^ means the first letter, careful the capital 
 
-
-# READING MULTIPLE CSV
-data <- read.csv(paste(directory,"/","0",i,".csv",sep = ""), header = TRUE)
-rates <- read.csv("outcome-of-care-measures.csv", colClasses = "character")
 
 #names 
 names(mortality_rates)[3:5] <- c("heart attack", "heart failure", "pneumonia")
@@ -42,8 +67,6 @@ i in observations$id[observations$nobs > threshold]
 l1 <- list(a = "a", b = 2, c = pi+2i)
 unlist(l1)
 
-  
- 
   
   
 
