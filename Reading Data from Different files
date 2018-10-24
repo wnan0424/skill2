@@ -82,6 +82,21 @@ content2 <- content(html2, as= "text")
 parsedHtml <- htmlParse(content2, asText =T )
 xpathSApply(parsedHtml, "//title", xmlValue)
 
+# Question 4
+# How many characters are in the 10th, 20th, 30th and 100th lines of HTML from this page:
+# http://biostat.jhsph.edu/~jleek/contact.html
+# (Hint: the nchar() function in R may be helpful)
+tryCatch({
+  con <- url("http://biostat.jhsph.edu/~jleek/contact.html")
+  html <- readLines(con)
+}, finally = {
+  close(con)
+})
+answer4 <- c()
+sapply(c(10, 20, 30, 40), function(line) {
+  answer4 <<- c(answer4, nchar(html[line]))
+})
+
 #need passwords
 pg2 <- GET("http://.../passwd", authenticate("user","passwd"))
 pg2 
@@ -90,6 +105,71 @@ pg2
 google <- handle("http://google.com")
 pg1 <- GET(handle = google, path ="/")
 pg2 <- GET(handle = google, path ="serch")
+
+
+
+
+#reading from API 
+load_packages("httr", "sqldf")
+
+# Question 1
+#
+# Register an application with the Github API here: 
+# https://github.com/settings/applications. 
+#
+# Access the API to get information on your instructors repositories 
+# (hint: this is the url you want "https://api.github.com/users/jtleek/repos"). 
+# Use this data to find the time that the datasharing repo was created. 
+#
+# What time was it created? 
+#
+# Hints:
+# This tutorial may be useful
+# https://github.com/hadley/httr/blob/master/demo/oauth2-github.r
+#
+# You may also need to run the code in the base R package and not R studio.
+
+# Find OAuth settings for github:
+# http://developer.github.com/v3/oauth/
+github <- oauth_endpoints("github")
+
+# Replace your key and secret below.
+myapp <- oauth_app("github",
+                   key = "67340622eff03d86a8c2",
+                   secret = "1efcb21fc38d1d64c82d9c7f87b89dd90978b0e5")
+
+
+
+# Get OAuth credentials
+github_token <- oauth2.0_token(github, myapp)
+
+# Use the API
+gtoken <- config(token = github_token)
+req <- with_config(gtoken, GET("https://api.github.com/users/jtleek/repos"))
+stop_for_status(req)
+repo_list <- content(req)
+
+answer1 <- c() 
+for (i in 1:length(repo_list)) {
+        repo <- repo_list[[i]]
+        if (repo$name == "datasharing") {
+                answer1 = repo
+                break
+        }
+}
+
+
+
+# reading From For 
+fileurl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fwksst8110.for"
+download.file(fileurl, destfile = "quiz3.for")
+aa <- read.fwf("quiz3.for", widths = c(-1,9,c(-5,4,4),c(-5,4,4),c(-5,4,4),c(-5,4,4)),skip = 4)
+# equal to bb <- read.fwf("quiz3.for", widths = c(-1,9,-5,4,4,-5,4,4,-5,4,4,-5,4,4),skip = 4)
+# equal to 
+col_seq <- c(-5, 4, 4)
+cc <- read.fwf("quiz3.for", widths = c(-1,9, col_seq, col_seq, col_seq, col_seq),skip = 4)
+dd <- sum(bb[,4])
+
 
 
 
