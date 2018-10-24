@@ -90,3 +90,12 @@ pg2
 google <- handle("http://google.com")
 pg1 <- GET(handle = google, path ="/")
 pg2 <- GET(handle = google, path ="serch")
+
+
+
+read.arff(Weka)
+read.dta(Stata)
+read.mtp(Minitab)
+read.octave(Octave)
+read.spss(SPSS)
+read.xport(SAS)
