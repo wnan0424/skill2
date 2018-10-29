@@ -172,6 +172,13 @@ dd <- sum(bb[,4])
 
 
 
+#READING FROM jpg 
+if (!file.exists("./data")){dir.create("./data")}
+fileurl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fjeff.jpg"
+download.file(fileurl, destfile = "aa.jpg", mode = "wb")
+jp <- readJPEG("aa.jpg", native = T)
+quantile(jp, probs = c(0.3, 0.8))
+
 
 read.arff(Weka)
 read.dta(Stata)
