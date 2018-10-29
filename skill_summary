@@ -40,11 +40,14 @@ index <- c(grep("^Hospital.*Death*", names(rates)))  # ^ means the first letter,
 
 #names 
 names(mortality_rates)[3:5] <- c("heart attack", "heart failure", "pneumonia")
+renames()
+
 
 #OMIT NA 
 mean(allData, na.rm=TRUE)
 data2 <- na.omit(data) 
 cor(a,b, use = "complete.obs")
+
 
 #data.frame 
 observedcase <- data.frame(id = numeric(length(id)), nobs= numeric(length(id)))
@@ -86,17 +89,31 @@ unlist(l1)
 
 
 3.screening 
+#select() slect the column
+
+
+#filter(), filter the row 
+
+
+#arrange()
+top_counts_sorted <- arrange(top_counts, desc(count))
+
+
+#mutate
+mutate(size_mb = size/ 2^20)
+
+
 #which
 which(state_data[,11] == min(state_data[,11],na.rm = T))      #return the number of row of min 
  
 state_data <- outcame[outcame$State == state, ]
+
 
 #subset 
 aa <- data.frame(a = 1:5,c =c("a","b","c","d","e"), b =c(21,23,444,1,20))
 bb <- subset.data.frame(aa, select = c (a,b))
 
 complete1_subset <- subset(complete1, nobs > threshold)
- 
  
  
  
@@ -148,6 +165,49 @@ tapply(flags$animate, flags$landmass, mean)
                                                                 function to each group.                                                                
 tapply(mtcars$mpg, mtcars$cyl, mean) == sapply(split(mtcars$mpg, mtcars$cyl), mean) == with(mtcars, tapply(mpg, cyl, mean))                                                                 
 
-7. other 
+7. summary 
+#tbl
+cran <- tbl_df(mydf)
+
+
+#smmarise
+summarise(by_package, mean(size))
+
+
+#group_by 
+by_package <- group_by(cran, package)
+
+pack_sum <- summarize(by_package,count = n(),unique = n_distinct(ip_id),countries = n_distinct(country),avg_bytes = mean(size) )
+
+quantile(pack_sum$count, probs = 0.99)
+
+View(top_counts)
+
+
+#str 
+
+
+
+8. tidy data 
+#gather 
+gather(students, sex, count, -grade)
+gather(class, grade, class1:class5, na.rm = TRUE) 
+
+#separate
+separate(data = res, col = sex_class, into = c("sex", "class"))
+
+#spread
+spread(test, grade)
+
+#parse_number
+library(readr)
+parse_number("class5")
+
+#unique
+unique(student4)
+
+other 
 min <- .Machine$integer.max
+
+use chain %>% 
 
