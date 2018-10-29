@@ -187,25 +187,6 @@ View(top_counts)
 #str 
 
 
-
-8. tidy data 
-#gather 
-gather(students, sex, count, -grade)
-gather(class, grade, class1:class5, na.rm = TRUE) 
-
-#separate
-separate(data = res, col = sex_class, into = c("sex", "class"))
-
-#spread
-spread(test, grade)
-
-#parse_number
-library(readr)
-parse_number("class5")
-
-#unique
-unique(student4)
-
 other 
 min <- .Machine$integer.max
 
