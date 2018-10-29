@@ -1,0 +1,64 @@
+1. dplyr 
+#rm & tbl 
+rm("mydf")
+cran <- tbl_df(mydf)
+
+
+#select() slect the column
+
+
+#filter(), filter the row 
+
+
+#arrange()
+top_counts_sorted <- arrange(top_counts, desc(count))
+
+
+#mutate
+mutate(size_mb = size/ 2^20)
+
+#summarize
+summarise(by_package, mean(size))
+
+
+#group_by 
+by_package <- group_by(cran, package)
+
+pack_sum <- summarize(by_package,count = n(),unique = n_distinct(ip_id),countries = n_distinct(country),avg_bytes = mean(size) )
+
+> quantile(pack_sum$count, probs = 0.99)
+> View(top_counts)
+
+
+#chain 
+result3 <-
+  cran %>%
+  group_by(package) %>%
+  summarize(count = n(),
+            unique = n_distinct(ip_id),
+            countries = n_distinct(country),
+            avg_bytes = mean(size)
+  ) %>%
+  filter(countries > 60) %>%
+  arrange(desc(countries), avg_bytes)%>%
+print()
+
+
+
+2. tidyr 
+#gather 
+gather(students, sex, count, -grade)
+gather(class, grade, class1:class5, na.rm = TRUE) 
+
+#separate
+separate(data = res, col = sex_class, into = c("sex", "class"))
+
+#spread
+spread(test, grade)
+
+#parse_number
+library(readr)
+parse_number("class5")
+
+#unique
+unique(student4)
