@@ -29,6 +29,7 @@ pack_sum <- summarize(by_package,count = n(),unique = n_distinct(ip_id),countrie
 > quantile(pack_sum$count, probs = 0.99)
 > View(top_counts)
 
+addmargins(table(year(sampleTimes), weekdays(sampleTimes)))
 
 #chain 
 result3 <-
@@ -62,3 +63,29 @@ parse_number("class5")
 
 #unique
 unique(student4)
+
+
+
+3. lubridate
+library(lubridate) 
+Sys.getlocale("LC_TIME") 
+help(package = lubridate)
+year(this_day) #hour(), minute(), and second()
+wday(this_day, label = T)
+Levels: Sun < Mon < Tue < Wed < Thu < Fri < Sat
+this_moment <- now()
+my_date<- ymd("1989-05-17")
+ymd("1989 May 17")
+mdy("March 12, 1975")
+dmy(25081985)
+hms("03:22:14")
+update(this_moment, hours = 8, minutes = 34, seconds = 55)
+nyc <- now("America/New_York")
+depart <- nyc + days(2)
+arrive <- depart + hours(15)+minutes(50)
+with_tz(arrive, tzone = "Asia/Hong_Kong")
+last_time <- mdy("June 17, 2008", tz= "Singapore")
+how_long <- interval(last_time, arrive)
+timer
+stopwatch()
+as.period(how_long)
