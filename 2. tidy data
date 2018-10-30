@@ -64,3 +64,50 @@ flood|fire # any line has either of flood and fire.
 [0-9]+ (.*) [0-9]+  # 720 dhvnef 43; 23 or 433; 
 [Bb]ush( +[^ ]+ +){1,5} debate
  +([a-zA-Z]+) +\1 + # so so ; blah blah 
+ 
+ 3. about date 
+d1 <- Sys.Date()
+
+format(d2, "%a %b %d") #formatting dates
+weekdays(d2)   #get "sunday"
+julian(d2)  # get detial 
+
+x <- c("1jan1960","2jan1960"); z <- as.Date(x, "%d%b%Y) 
+z[1] - z[2]
+wday(x[1])  # get 3 
+wday(x[1], label =T) get Tues 
+
+library(lubridate)
+ymd("20140108")
+dmy("03-04-2013") 
+ymd_hms("2011-08-03 10:15:03", tz = "Pacific/Auckland") 
+
+4. DATA resources 
+gapminder 
+survey data asdfree.com 
+infochimps marketplace infochimps.com/marketplace
+kaggle kaggle.com 
+
+5.SWIRL DATE 
+library(lubridate) 
+Sys.getlocale("LC_TIME") 
+help(package = lubridate)
+year(this_day) #hour(), minute(), and second()
+wday(this_day, label = T)
+Levels: Sun < Mon < Tue < Wed < Thu < Fri < Sat
+this_moment <- now()
+my_date<- ymd("1989-05-17")
+ymd("1989 May 17")
+mdy("March 12, 1975")
+dmy(25081985)
+hms("03:22:14")
+update(this_moment, hours = 8, minutes = 34, seconds = 55)
+nyc <- now("America/New_York")
+depart <- nyc + days(2)
+arrive <- depart + hours(15)+minutes(50)
+with_tz(arrive, tzone = "Asia/Hong_Kong")
+last_time <- mdy("June 17, 2008", tz= "Singapore")
+how_long <- interval(last_time, arrive)
+timer
+stopwatch()
+as.period(how_long)
