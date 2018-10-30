@@ -43,7 +43,8 @@ index <- c(grep("^Hospital.*Death*", names(rates)))  # ^ means the first letter,
 
 #names and editing text 
 names(mortality_rates)[3:5] <- c("heart attack", "heart failure", "pneumonia")
-renames()
+ rename(CountryCode = "X", rankingGDP = "X.1", Long.Name = "X.3", gdp = "X.4")
+
 names(cameraData)
 tolower(names(cameraData)  #lowercase all letters
 toupper(names()) #oppsise
@@ -227,7 +228,6 @@ tapply(mtcars$mpg, mtcars$cyl, mean) == sapply(split(mtcars$mpg, mtcars$cyl), me
 #tbl
 cran <- tbl_df(mydf)
 
-
 #smmarise
 summarise(by_package, mean(size))
 
@@ -251,6 +251,8 @@ table(matchedData$Income.Group, matchedData$Rank.Groups)
 ## Lower middle income          *5*        13        12         8        16
 ## Upper middle income         11         9         8         8         9
 
+addmargins(table(year(sampleTimes), weekdays(sampleTimes))) #add the sum 
+
 
 
 #str 
@@ -258,6 +260,6 @@ table(matchedData$Income.Group, matchedData$Rank.Groups)
 
 other 
 min <- .Machine$integer.max
-
+about date see lubridate package 
 use chain %>% 
 
