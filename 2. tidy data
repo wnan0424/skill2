@@ -16,3 +16,51 @@ parse_number("class5")
 
 #unique
 unique(student4)
+
+
+
+week 4 
+1. editing text variables 
+names(cameraData)
+tolower(names(cameraData)  #lowercase all letters
+toupper(names()) #oppsise
+
+splitnames <- strsplit(names(cameraData), "\\.") # split the "."
+firstElement <- function(x){x[1]} 
+sapply(splitnames, firstElement) 
+
+sub("_","",names(reviews),) #remove first "_" 
+gsub("_","",names(reviews),)  #remove mutiple "_"
+substr("jeffrey leek",1,7) # get the 1 to 7 characters of the strings 
+
+paste("jeffrey", "leek", sep = "-")  # get space in between without sep. 
+paste0("jeffrey","leek") # get "jeffreyleek"
+
+grep("Alameda", cameraData$intersection) # finding values, return the location(which) 
+grepl("Alameda", cameraData$intersection) #return the logical vector 
+grep("Alameda", cameraData$intersection, value =T)#return the original strings 
+
+library(stringr) 
+nchar("jeffrey leek") #return the number of appear time 
+
+str_trim("jeff    ") #get "jeff"
+
+
+
+2. regular expressions
+^i think #represents the first 
+moring$ #represents the end of a line
+[Bb][Uu][Ss][Hh]
+^[Ii] am 
+^[0-9][a-zA-Z]  # get  "7th..."
+[^?.]$  #means all line ending by "? and ." will be delete
+9.11  #refer to any character 9-11, 9:11 911 9/11
+flood|fire # any line has either of flood and fire.
+^[Gg]ood | [Bb]ad 
+^([Gg]ood | [Bb]ad )
+[Gg]eorge( [Ww]\.)? [Bb]ush # question mark indicates   optional. 
+\. # means it is literal dot rather than a metacharacter.
+(.*) #anything in the ()
+[0-9]+ (.*) [0-9]+  # 720 dhvnef 43; 23 or 433; 
+[Bb]ush( +[^ ]+ +){1,5} debate
+ +([a-zA-Z]+) +\1 + # so so ; blah blah 
