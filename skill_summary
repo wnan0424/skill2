@@ -52,6 +52,7 @@ toupper(names()) #oppsise
 splitnames <- strsplit(names(cameraData), "\\.") # split the "."
 firstElement <- function(x){x[1]} 
 sapply(splitnames, firstElement) 
+bb <- strsplit(names(aa), "wgtp")   # remove the "wgtp"from all names 
 
 sub("_","",names(reviews),) #remove first "_" 
 gsub("_","",names(reviews),)  #remove mutiple "_"
