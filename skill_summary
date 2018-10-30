@@ -21,8 +21,6 @@ download.file(url, destfile = "temp")
 unzip("temp")
 unlink("temp")
 
-#initialize: read, index, name 
-
 #read CSV as table
 data <- read.table("data.csv", sep = ",", header T, rownames, quote ="", nrow, skip, na.strings)  #don't read quotation mark 
 data <- fread("survey.csv, sep = ",")
@@ -30,7 +28,12 @@ data <- fread("survey.csv, sep = ",")
 data <- read.csv(paste(directory,"/","0",i,".csv",sep = ""), header = TRUE)
 rates <- read.csv("outcome-of-care-measures.csv", colClasses = "character")
 
+aa <- read.csv("11.csv", skip = 4, nrows = 215) %>%
+        subset(!is.na(X) & X != "", select = c("X","X.1","X.3","X.4"))%>%
+        rename(CountryCode = "X", rankingGDP = "X.1", Long.Name = "X.3", gdp = "X.4")
 
+
+#initialize
 allData <- numeric()
 comp <- data.frame(id=numeric(length(1:4)), nobs=numeric(length(1:4)))
 
@@ -38,9 +41,32 @@ comp <- data.frame(id=numeric(length(1:4)), nobs=numeric(length(1:4)))
 index <- c(grep("^Hospital.*Death*", names(rates)))  # ^ means the first letter, careful the capital 
 
 
-#names 
+#names and editing text 
 names(mortality_rates)[3:5] <- c("heart attack", "heart failure", "pneumonia")
 renames()
+names(cameraData)
+tolower(names(cameraData)  #lowercase all letters
+toupper(names()) #oppsise
+
+splitnames <- strsplit(names(cameraData), "\\.") # split the "."
+firstElement <- function(x){x[1]} 
+sapply(splitnames, firstElement) 
+
+sub("_","",names(reviews),) #remove first "_" 
+gsub("_","",names(reviews),)  #remove mutiple "_"
+substr("jeffrey leek",1,7) # get the 1 to 7 characters of the strings 
+
+paste("jeffrey", "leek", sep = "-")  # get space in between without sep. 
+paste0("jeffrey","leek") # get "jeffreyleek"
+
+grep("Alameda", cameraData$intersection) # finding values, return the location(which) 
+grepl("Alameda", cameraData$intersection) #return the logical vector 
+grep("Alameda", cameraData$intersection, value =T)#return the original strings 
+
+library(stringr) 
+nchar("jeffrey leek") #return the number of appear time 
+
+str_trim("jeff    ") #get "jeff"
 
 
 #OMIT NA 
@@ -59,6 +85,23 @@ i in observations$id[observations$nobs > threshold]
 l1 <- list(a = "a", b = 2, c = pi+2i)
 unlist(l1)
 
+#regular expressions
+^i think #represents the first 
+moring$ #represents the end of a line
+[Bb][Uu][Ss][Hh]
+^[Ii] am 
+^[0-9][a-zA-Z]  # get  "7th..."
+[^?.]$  #means all line ending by "? and ." will be delete
+9.11  #refer to any character 9-11, 9:11 911 9/11
+flood|fire # any line has either of flood and fire.
+^[Gg]ood | [Bb]ad 
+^([Gg]ood | [Bb]ad )
+[Gg]eorge( [Ww]\.)? [Bb]ush # question mark indicates   optional. 
+\. # means it is literal dot rather than a metacharacter.
+(.*) #anything in the ()
+[0-9]+ (.*) [0-9]+  # 720 dhvnef 43; 23 or 433; 
+[Bb]ush( +[^ ]+ +){1,5} debate
+ +([a-zA-Z]+) +\1 + # so so ; blah blah 
   
   
 
@@ -88,7 +131,7 @@ unlist(l1)
 
 
 
-3.screening 
+3.screening and merging 
 #select() slect the column
 
 
@@ -109,11 +152,23 @@ which(state_data[,11] == min(state_data[,11],na.rm = T))      #return the number
 state_data <- outcame[outcame$State == state, ]
 
 
-#subset 
+#subset $ normal 
 aa <- data.frame(a = 1:5,c =c("a","b","c","d","e"), b =c(21,23,444,1,20))
 bb <- subset.data.frame(aa, select = c (a,b))
 
 complete1_subset <- subset(complete1, nobs > threshold)
+ 
+answer5 <- DT[Income.Group == "Lower middle income", ]
+
+
+#merge 
+cc<- merge(aa,bb, by = "CountryCode", all = T)
+ 
+ 
+#cut2
+library(Hmisc)
+matchedData$Rank.Groups = cut2(matchedData$Rank, g = 5)
+table(matchedData$Income.Group, matchedData$Rank.Groups)
  
  
  
@@ -165,6 +220,9 @@ tapply(flags$animate, flags$landmass, mean)
                                                                 function to each group.                                                                
 tapply(mtcars$mpg, mtcars$cyl, mean) == sapply(split(mtcars$mpg, mtcars$cyl), mean) == with(mtcars, tapply(mpg, cyl, mean))                                                                 
 
+
+
+
 7. summary 
 #tbl
 cran <- tbl_df(mydf)
@@ -182,6 +240,17 @@ pack_sum <- summarize(by_package,count = n(),unique = n_distinct(ip_id),countrie
 quantile(pack_sum$count, probs = 0.99)
 
 View(top_counts)
+
+
+#table 
+table(matchedData$Income.Group, matchedData$Rank.Groups)
+##                         [  1, 39) [ 39, 77) [ 77,115) [115,154) [154,190]
+## High income: nonOECD         4         5         8         5         1
+## High income: OECD           18        10         1         1         0
+## Low income                   0         1         9        16        11
+## Lower middle income          *5*        13        12         8        16
+## Upper middle income         11         9         8         8         9
+
 
 
 #str 
