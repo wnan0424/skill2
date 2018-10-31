@@ -33,42 +33,13 @@ aa <- read.csv("11.csv", skip = 4, nrows = 215) %>%
         rename(CountryCode = "X", rankingGDP = "X.1", Long.Name = "X.3", gdp = "X.4")
 
 
+#write 
+write.table(final_data, file = "final_data.txt", row.name=FALSE)
+
+
 #initialize
 allData <- numeric()
 comp <- data.frame(id=numeric(length(1:4)), nobs=numeric(length(1:4)))
-
-#index
-index <- c(grep("^Hospital.*Death*", names(rates)))  # ^ means the first letter, careful the capital 
-
-
-#names and editing text 
-names(mortality_rates)[3:5] <- c("heart attack", "heart failure", "pneumonia")
- rename(CountryCode = "X", rankingGDP = "X.1", Long.Name = "X.3", gdp = "X.4")
-
-names(cameraData)
-tolower(names(cameraData)  #lowercase all letters
-toupper(names()) #oppsise
-
-splitnames <- strsplit(names(cameraData), "\\.") # split the "."
-firstElement <- function(x){x[1]} 
-sapply(splitnames, firstElement) 
-bb <- strsplit(names(aa), "wgtp")   # remove the "wgtp"from all names 
-
-sub("_","",names(reviews),) #remove first "_" 
-gsub("_","",names(reviews),)  #remove mutiple "_"
-substr("jeffrey leek",1,7) # get the 1 to 7 characters of the strings 
-
-paste("jeffrey", "leek", sep = "-")  # get space in between without sep. 
-paste0("jeffrey","leek") # get "jeffreyleek"
-
-grep("Alameda", cameraData$intersection) # finding values, return the location(which) 
-grepl("Alameda", cameraData$intersection) #return the logical vector 
-grep("Alameda", cameraData$intersection, value =T)#return the original strings 
-
-library(stringr) 
-nchar("jeffrey leek") #return the number of appear time 
-
-str_trim("jeff    ") #get "jeff"
 
 
 #OMIT NA 
@@ -82,6 +53,9 @@ observedcase <- data.frame(id = numeric(length(id)), nobs= numeric(length(id)))
 observedcase[["id"]][count] <- i
 observedcase[["nobs"]][count] <- nobs
 i in observations$id[observations$nobs > threshold]
+train <- data.frame(subject_train, activity_train, X_train) #merging data 
+
+
 #list 
 
 l1 <- list(a = "a", b = 2, c = pi+2i)
@@ -163,14 +137,6 @@ complete1_subset <- subset(complete1, nobs > threshold)
 answer5 <- DT[Income.Group == "Lower middle income", ]
 
 
-#merge 
-cc<- merge(aa,bb, by = "CountryCode", all = T)
- 
- 
-#cut2
-library(Hmisc)
-matchedData$Rank.Groups = cut2(matchedData$Rank, g = 5)
-table(matchedData$Income.Group, matchedData$Rank.Groups)
  
  
  
@@ -225,11 +191,15 @@ tapply(mtcars$mpg, mtcars$cyl, mean) == sapply(split(mtcars$mpg, mtcars$cyl), me
 
 
 
-7. summary 
+7. summary and reshaping 
 #tbl
 cran <- tbl_df(mydf)
 
-#smmarise
+
+#str 
+
+
+#smmarise 
 summarise(by_package, mean(size))
 
 
@@ -255,8 +225,67 @@ table(matchedData$Income.Group, matchedData$Rank.Groups)
 addmargins(table(year(sampleTimes), weekdays(sampleTimes))) #add the sum 
 
 
+#melt & dcast   # turn one column into variable
+melted <- melt(data5, id=c("subject","activity"))
+tidy <- dcast(melted, subject+activity ~ variable, mean)
 
-#str 
+bb <- melt(final_data, id = c("subject","activity"))
+cc <- dcast(bb, subject ~ activity, sum)
+
+
+#aggregate 
+data.tidy <- aggregate(data.sub[,3:81], by = list(activity = data.sub$activity, subject = data.sub$subject),FUN = mean)
+
+
+#merge 
+cc<- merge(aa,bb, by = "CountryCode", all = T)
+ 
+ 
+#cut2
+library(Hmisc)
+matchedData$Rank.Groups = cut2(matchedData$Rank, g = 5)
+table(matchedData$Income.Group, matchedData$Rank.Groups) 
+
+
+
+8. editing text and index  
+#index
+index <- c(grep("^Hospital.*Death*", names(rates)))  # ^ means the first letter, careful the capital 
+
+
+#names and editing text 
+names(mortality_rates)[3:5] <- c("heart attack", "heart failure", "pneumonia")
+ rename(CountryCode = "X", rankingGDP = "X.1", Long.Name = "X.3", gdp = "X.4")
+
+names(cameraData)
+tolower(names(cameraData)  #lowercase all letters
+toupper(names()) #oppsise
+
+splitnames <- strsplit(names(cameraData), "\\.") # split the "."
+firstElement <- function(x){x[1]} 
+sapply(splitnames, firstElement) 
+bb <- strsplit(names(aa), "wgtp")   # remove the "wgtp"from all names 
+
+sub("_","",names(reviews),) #remove first "_" 
+gsub("_","",names(reviews),)  #remove mutiple "_"
+names(data4) <- gsub("^f","FrequencyDomain-",names(data4))
+names(data4) <- gsub("[(][)]","",names(data4))
+names(data4) <- gsub("Body","Body-",names(data4))
+
+substr("jeffrey leek",1,7) # get the 1 to 7 characters of the strings 
+
+paste("jeffrey", "leek", sep = "-")  # get space in between without sep. 
+paste0("jeffrey","leek") # get "jeffreyleek"
+
+grep("Alameda", cameraData$intersection) # finding values, return the location(which) 
+grepl("Alameda", cameraData$intersection) #return the logical vector 
+grep("Alameda", cameraData$intersection, value =T)#return the original strings 
+
+library(stringr) 
+nchar("jeffrey leek") #return the number of appear time 
+
+str_trim("jeff    ") #get "jeff"
+
 
 
 other 
