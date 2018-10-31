@@ -1,13 +1,6 @@
 
 
 1. initialize:  
-# READING MULTIPLE CSV
-#OMIT NA 
-#data.frame 
-#index
-#names 
-#download 
-
 #download 
 if (!file.exists("data")){
         dir.create("data")
@@ -48,39 +41,13 @@ data2 <- na.omit(data)
 cor(a,b, use = "complete.obs")
 
 
-#data.frame 
-observedcase <- data.frame(id = numeric(length(id)), nobs= numeric(length(id)))
-observedcase[["id"]][count] <- i
-observedcase[["nobs"]][count] <- nobs
-i in observations$id[observations$nobs > threshold]
-train <- data.frame(subject_train, activity_train, X_train) #merging data 
-
-
 #list 
 
 l1 <- list(a = "a", b = 2, c = pi+2i)
 unlist(l1)
 
-#regular expressions
-^i think #represents the first 
-moring$ #represents the end of a line
-[Bb][Uu][Ss][Hh]
-^[Ii] am 
-^[0-9][a-zA-Z]  # get  "7th..."
-[^?.]$  #means all line ending by "? and ." will be delete
-9.11  #refer to any character 9-11, 9:11 911 9/11
-flood|fire # any line has either of flood and fire.
-^[Gg]ood | [Bb]ad 
-^([Gg]ood | [Bb]ad )
-[Gg]eorge( [Ww]\.)? [Bb]ush # question mark indicates   optional. 
-\. # means it is literal dot rather than a metacharacter.
-(.*) #anything in the ()
-[0-9]+ (.*) [0-9]+  # 720 dhvnef 43; 23 or 433; 
-[Bb]ush( +[^ ]+ +){1,5} debate
- +([a-zA-Z]+) +\1 + # so so ; blah blah 
-  
-  
 
+ 
 2. simulation 
  sample(1:6, 4, replace = TRUE) #select 4 number from 1:6 
  flips <- sample(c(0,1), 100, replace = TRUE, prob = c(0.3, 0.7))
@@ -107,7 +74,7 @@ flood|fire # any line has either of flood and fire.
 
 
 
-3.screening and merging 
+3.screening and change value 
 #select() slect the column
 
 
@@ -137,8 +104,17 @@ complete1_subset <- subset(complete1, nobs > threshold)
 answer5 <- DT[Income.Group == "Lower middle income", ]
 
 
- 
- 
+#data.frame 
+observedcase <- data.frame(id = numeric(length(id)), nobs= numeric(length(id)))
+observedcase[["id"]][count] <- i
+observedcase[["nobs"]][count] <- nobs
+i in observations$id[observations$nobs > threshold]
+train <- data.frame(subject_train, activity_train, X_train) #merging data 
+
+#factor 
+meanstd_data$activity <- factor(meanstd_data$activity, levels = activity_labels[,1], labels = activity_labels[,2])
+
+
  
 4. order 
 #order 
@@ -212,6 +188,8 @@ quantile(pack_sum$count, probs = 0.99)
 
 View(top_counts)
 
+df_data_averaged <- df_data_reduced %>%group_by(subject, activity) %>% summarize_all(funs(mean)) %>% arrange(subject)
+
 
 #table 
 table(matchedData$Income.Group, matchedData$Rank.Groups)
@@ -228,6 +206,7 @@ addmargins(table(year(sampleTimes), weekdays(sampleTimes))) #add the sum
 #melt & dcast   # turn one column into variable
 melted <- melt(data5, id=c("subject","activity"))
 tidy <- dcast(melted, subject+activity ~ variable, mean)
+
 
 bb <- melt(final_data, id = c("subject","activity"))
 cc <- dcast(bb, subject ~ activity, sum)
@@ -270,7 +249,10 @@ sub("_","",names(reviews),) #remove first "_"
 gsub("_","",names(reviews),)  #remove mutiple "_"
 names(data4) <- gsub("^f","FrequencyDomain-",names(data4))
 names(data4) <- gsub("[(][)]","",names(data4))
+featuresWanted.names <- gsub('[-()]', '', featuresWanted.names)
 names(data4) <- gsub("Body","Body-",names(data4))
+featuresWanted <- grep(".*mean.*|.*std.*", features[,2])
+
 
 substr("jeffrey leek",1,7) # get the 1 to 7 characters of the strings 
 
@@ -287,6 +269,25 @@ nchar("jeffrey leek") #return the number of appear time
 str_trim("jeff    ") #get "jeff"
 
 
+#regular expressions
+^i think #represents the first 
+moring$ #represents the end of a line
+[Bb][Uu][Ss][Hh]
+^[Ii] am 
+^[0-9][a-zA-Z]  # get  "7th..."
+[^?.]$  #means all line ending by "? and ." will be delete
+9.11  #refer to any character 9-11, 9:11 911 9/11
+flood|fire # any line has either of flood and fire.
+^[Gg]ood | [Bb]ad 
+^([Gg]ood | [Bb]ad )
+[Gg]eorge( [Ww]\.)? [Bb]ush # question mark indicates   optional. 
+\. # means it is literal dot rather than a metacharacter.
+(.*) #anything in the ()
+[0-9]+ (.*) [0-9]+  # 720 dhvnef 43; 23 or 433; 
+[Bb]ush( +[^ ]+ +){1,5} debate
+ +([a-zA-Z]+) +\1 + # so so ; blah blah 
+  
+  
 
 other 
 min <- .Machine$integer.max
