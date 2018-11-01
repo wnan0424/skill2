@@ -99,6 +99,8 @@ state_data <- outcame[outcame$State == state, ]
 aa <- data.frame(a = 1:5,c =c("a","b","c","d","e"), b =c(21,23,444,1,20))
 bb <- subset.data.frame(aa, select = c (a,b))
 
+subset(pollution, region == "west")$pm25
+
 complete1_subset <- subset(complete1, nobs > threshold)
  
 answer5 <- DT[Income.Group == "Lower middle income", ]
