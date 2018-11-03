@@ -290,6 +290,18 @@ flood|fire # any line has either of flood and fire.
  +([a-zA-Z]+) +\1 + # so so ; blah blah 
   
   
+  
+9.   base graphics 
+| Before plotting, it is always a good idea to get a sense of the data.
+| Key R commands for doing so include, dim(), names(), head(), tail()
+| and summary().
+ 
+ plot(x = cars$speed, y = cars$dist, ylab = "Stopping Distance")
+ plot(cars, main = "My Plot", sub = "My Plot Subtitle", xlim = c(10, 15), col = 2, pch = 2) # color is red, shape is triangle 
+ 
+ > boxplot(mpg ~ cyl, data = mtcars)
+ 
+ > ggplot(mtcars, aes(x=mpg, y=wt, colour=cyl)) +geom_point()  
 
 other 
 min <- .Machine$integer.max
