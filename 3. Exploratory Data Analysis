@@ -1,0 +1,92 @@
+
+
+week 1 
+1. exploratory graphs
+hist(pollution$pm25, col = "green", breaks = 100)
+rug(pollution$pm25)
+abline( v = 12, lwd = 2) 
+abline( v = median(pollution$pm25), col = "magenta", lwd = 4) 
+
+boxplot(pollution$pm25, col = "blue")
+abline( h = 12)  
+
+barplot(table(pollution$region), col = "wheat", main = "number of counties in each region") 
+
+hist(subset(pollution, region == "west")$pm25, col = "green") 
+
+with(pollution, plot(latitude, pm25, col = region))
+abline(h = 12, lwd =2 , lty = 2) 
+with(subset(pollution, region = "west"), plot(latitude, pm25))
+
+2. plotting 
+pch ： the plotting symbol  8: snowflakes, 17: triangle
+lty : the line type 
+lwd : the line width 
+col : the ploting color; colors() get colors list 
+xlab : character string for the X-axis lable 
+ylab : for y-axis 
+
+par()
+las: the orientation of the axis labels 
+bg: the background color 
+mar: the margin size  par(mar = c(2,2,2,2) bottom,left,top,right
+oma: the outer margin size
+mfrow: number of plots per row( plots are filled row-wise) mfrow = c(1,2)
+mfcol: col-wise 
+
+par("lty") : get default values, get "solid" 
+
+with(subset(airquality, month == 5) , points(wind, ozone, col = "blue")
+text(-2,-2, "label")
+
+legend("topright", pch= c(17,8), col = c("blue","red"), legend = c("May","Other Months"))
+
+model <- lm (ozone ~ wind, airquality) 
+abline(model, lwd = 2)
+
+use three multiple plots and 
+mtext("Ozone and Weather in New York City", outer = TRUE) #main title of three plots 
+
+plot(x, y, xlab = "weight", ylab = "height") 
+
+g(2,50, labels = c("male","female"))
+plot(x,y, type = "n") 
+point(x[g == "male"], y[g == "female"], col = "green") 
+points(may$Wind, may$Ozone,  col = "blue",pch = 17)
+
+3. graphics devices 
+pdf(file = "myplot.pdf") 
+with(... , plot(...))
+dev.off()
+
+dev.copy(png, file = "geyserplot.png") # copy my plot to this files 
+dev.off()
+
+swirl : 
+1.Exploratory Graphs
+summary(pollution$pm25)
+quantile(pollution$pm25)
+
+boxplot(pm25 ~ region, data = pollution, col = "red")
+boxplot(Ozone ~ Month, airquality, xlab = "Month", ylab = "Ozone (ppb)", col.axis = "blue", col.lab ="red")
+
+par(mfrow = c(2,1), mar = c(4,4,2,1))
+with( pollution, plot(latitude, pm25))
+abline(h =12, lwd = 2, lty = 2)  # lty make dashed
+
+title(main = "Old Faithful Geyser data")
+
+2. graphics devices 
+dev.cur()
+pdf(file = "myplot.pdf")
+with(..., plot())
+dev.off()
+
+3. base ploting system 
+text(mean(cars$speed), max(cars$dist),"SWIRL rules!")
+
+lattice system
+xyplot(Life.Exp ~ Income | region, data = state, layout = c(4,1))
+ggplot2 
+qplot(displ,hwy, data = mpg)
+
