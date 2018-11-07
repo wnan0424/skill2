@@ -312,6 +312,8 @@ flood|fire # any line has either of flood and fire.
 
 other 
 min <- .Machine$integer.max
-about date see lubridate package 
 use chain %>% 
+data see 2.tidy day 
+graphic see 3. explotary data  or lubridate package 
+
 
