@@ -1,6 +1,10 @@
 
 
 1. initialize:  
+#open
+myedit("plot1.R")
+source(pathtofile("plot1.R"),local=TRUE)
+
 #download 
 if (!file.exists("data")){
         dir.create("data")
@@ -33,7 +37,7 @@ write.table(final_data, file = "final_data.txt", row.name=FALSE)
 #initialize
 allData <- numeric()
 comp <- data.frame(id=numeric(length(1:4)), nobs=numeric(length(1:4)))
-
+airquality <- transform(airquality, month = factor(month))
 
 #OMIT NA 
 mean(allData, na.rm=TRUE)
@@ -49,8 +53,14 @@ unlist(l1)
 
  
 2. simulation 
+sample(colors(),10)
  sample(1:6, 4, replace = TRUE) #select 4 number from 1:6 
  flips <- sample(c(0,1), 100, replace = TRUE, prob = c(0.3, 0.7))
+
+
+seq(0,1,len=6)
+rep(0:1, each = 50 )
+
 
 > rbinom (1, size = 100, prob = 0.7)
 [1] 61              # a single random variable that represents the number of heads in 100 flips of our unfair coin
@@ -115,7 +125,7 @@ train <- data.frame(subject_train, activity_train, X_train) #merging data
 
 #factor 
 meanstd_data$activity <- factor(meanstd_data$activity, levels = activity_labels[,1], labels = activity_labels[,2])
-
+airquality <- transform(airquality, month = factor(month))
 
  
 4. order 
@@ -210,6 +220,8 @@ table(matchedData$Income.Group, matchedData$Rank.Groups)
 ## Upper middle income         11         9         8         8         9
 
 addmargins(table(year(sampleTimes), weekdays(sampleTimes))) #add the sum 
+
+table(diamonds$color, diamonds$cut)
 
 
 #melt & dcast   # turn one column into variable
