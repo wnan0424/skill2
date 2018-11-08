@@ -101,3 +101,45 @@ project 1
   legend("topright", col=c("black", "red", "blue"),,lty=1, lwd=2, 
          c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
 
+
+
+
+week 2 
+
+1. lattice  ploting 
+library(lattice) 
+xyplot(ozone ~ wind | month, data = airquality, layout = c(5,1))
+
+
+f <- rep(0:1, each = 50 )
+f <- factor(f, labels = c("group1", "group2"))
+
+xyplot(y ~ x | f, panel = function(x,y,...){
+panel.xyplot(x,y,...)
+panel.lmline(x,y,col =2) 
+
+xyplot(price ~ carat | color*cut, data = diamonds, strip = FALSE, pch = 20, xlab = myxlab, ylab = myylab, main = mymain )
+
+swirl
+1. Working with Colors
+pal <- colorRamp(c("red","blue"))
+ 
+p1 <- colorRampPalette(c("red","blue"))
+p1(2)
+[1] "#FF0000" "#0000FF"
+
+plot(x,y,pch = 19, col= rgb(0,.5,.5))
+plot(x,y,pch = 19, col= rgb(0,.5,.5,.3)) # the forth argument help us to discriminate between different point densities. 
+
+RColorBrewer Package
+cols <- brewer.pal(3, "BuGn")
+showMe(cols)
+showMe <- function(cv){
+  myarg <- deparse(substitute(cv))
+  z<- outer( 1:20,1:20, "+")
+  obj<- list( x=1:20,y=1:20,z=z )
+  image(obj, col=cv, main=myarg  )
+}
+pal <- colorRampPalette(cols)
+showMe(pal(20))
+image(volcano, col = pal(20))
