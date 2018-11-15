@@ -103,7 +103,6 @@ project 1
 
 
 
-
 week 2 
 
 1. lattice  ploting 
@@ -143,3 +142,58 @@ showMe <- function(cv){
 pal <- colorRampPalette(cols)
 showMe(pal(20))
 image(volcano, col = pal(20))
+
+qplot(Wind, Ozone, data = 
+
+2. ggplot2 
+qplot(displ, hwy, data = mpg, color = drv)
+qplot(displ, hwy, data = mpg, geom = c("point","smooth"))
+hist: qplot(hwy, data = mpg, fill = frv)
+
+facets: qplot(displ, hwy, data = mpg, facets = .~drv, geom = c("point", "smooth"), method = "lm") 
+qplot(log(eno), data = maacs, geom = "density", color = mopo) 
+qplot(log(pm25), log(eno), data = maacs, color = mopos) + geom_smooth(method = "lm") 
+
+g <- ggplot(maacs, aes(logpm25, Nocturnalsympt)) 
+
+g + geom_point() + geom_smooth() 
+g + geom_point() + geom_smooth(method = "lm") + facet_grid(. ~ bimcat) + ggtitle("Swirl Rules!")
+
+g + geom_point(color = "pink", size = 4, alpha = 1/2)
+g + geom_point(aes(color = bmicat), size = 4, alpha = 1/2) + theme_bw(base_family = "Times") #theme_gray() which is the default theme (gray background with white grid lines) and theme_bw() which is a plainer (black and white) color scheme.
+labels: xlab(), ylab(), labs(), ggtitle() 
+
+outlier included: g + geom_line() + coord_cartesian(ylim = c (-3, 3)) 
+outlier missing: g + geom_line() + ylim(-3,3) 
+
+swirl
+qplot(drv, hwy, data = mpg, geom = "boxplot",color = manufacturer)
+
+qplot(hwy, data = mpg, facets = drv~., binwidth = 2)
+qplot(hwy, data = mpg, facets = .~ drv, binwidth = 2)
+
+g + geom_point(color = "pink", size = 4, alpha = 1/2)
+g + geom_point(size = 4, alpha = 1/2, aes(color = drv))
+
+motify labels : g + geom_point(aes(color = drv)) + labs(title = "Swirl Rules!") + labs(x = "Displacement", y = "Hwy Mileage")
+
+g + geom_point(aes(color = drv), size = 2 , alpha = 1/2) + geom_smooth(size = 4, linetype = 3, method = "lm", se = FALSE)
+
+g <- ggplot(testdat, aes(x = myx, y = myy))
+g + geom_line()
+g + geom_line()+ ylim(-3,3)
+g + geom_line()+ coord_cartesian(ylim = c(-3,3))
+
+g + geom_point() + facet_grid(drv ~ cyl, margins = TRUE)+ geom_smooth(method = "lm", se = FALSE, size = 2, color = "black") + labs(x = "Displacement", y = "Highway Mileage", title = "Swirl Rules!")
+
+qplot(price, data= diamonds, binwidth = 18497/30, fill = cut)
+qplot(price, data = diamonds, geom = "density")
+qplot(price, data = diamonds, geom = "density", color = cut)
+
+qplot(carat, price, data = diamonds, color = cut) +geom_smooth(method = "lm")
+qplot(carat, price, data = diamonds, color = cut,facets = .~cut) +geom_smooth(method = "lm") 
+
+cutpoints <- quantile(diamonds$carat, seq(0,1,length = 4), na.rm = TRUE)
+diamonds$car2 <- cut(diamonds$carat, cutpoints)
+g+ geom_point(alpha = 1/3) + facet_grid(cut ~ car2) + geom_smooth(method = "lm", size = 3, color = "pink")
+ggplot(diamonds, aes(carat, price)) + geom_boxplot() + facet_grid(.~cut)
