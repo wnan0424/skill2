@@ -131,7 +131,8 @@ plot(x,y,pch = 19, col= rgb(0,.5,.5))
 plot(x,y,pch = 19, col= rgb(0,.5,.5,.3)) # the forth argument help us to discriminate between different point densities. 
 
 RColorBrewer Package
-cols <- brewer.pal(3, "BuGn")
+library(RColorBrewer)
+cols <- brewer.pal(3, "BuGn")  #other type beautiful colors see the picture. 
 showMe(cols)
 showMe <- function(cv){
   myarg <- deparse(substitute(cv))
@@ -143,7 +144,11 @@ pal <- colorRampPalette(cols)
 showMe(pal(20))
 image(volcano, col = pal(20))
 
-qplot(Wind, Ozone, data = 
+> x <- rnorm(10000)
+> y <- rnorm(10000)
+> smoothScatter(x,y)
+
+plot(x,y, col = rgb(0, 0, 0, 0.2), pch = 19) #transparence of rgb; the first three para are the colors of red, green and blue. 
 
 2. ggplot2 
 qplot(displ, hwy, data = mpg, color = drv)
