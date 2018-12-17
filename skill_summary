@@ -153,6 +153,16 @@ train <- data.frame(subject_train, activity_train, X_train) #merging data
 meanstd_data$activity <- factor(meanstd_data$activity, levels = activity_labels[,1], labels = activity_labels[,2])
 airquality <- transform(airquality, month = factor(month))
 
+make factor 
+activity_new$date <- as.Date(activity_new$date)
+dayInx <- function(date){
+        date1 <- weekdays(date)
+        if (date1 == "Sunday" | date1 == "Saturday") 
+        return("Weekend")
+        else return("Weekdays")
+}
+activity_new <- mutate(activity_new, daytype = sapply(activity_new$date, dayInx))
+
  
 4. order 
 #order 
@@ -226,8 +236,10 @@ summarise(by_package, mean(size))
 
 #group_by 
 by_package <- group_by(cran, package)
-
 pack_sum <- summarize(by_package,count = n(),unique = n_distinct(ip_id),countries = n_distinct(country),avg_bytes = mean(size) )
+
+bb <- group_by(activity_new, interval, daytype) #group by two indicates 
+cc <- summarise(bb, steps = mean(steps))
 
 quantile(pack_sum$count, probs = 0.99)
 
