@@ -39,10 +39,13 @@ allData <- numeric()
 comp <- data.frame(id=numeric(length(1:4)), nobs=numeric(length(1:4)))
 airquality <- transform(airquality, month = factor(month))
 
-#OMIT NA 
+#Obout NA 
 mean(allData, na.rm=TRUE)
 data2 <- na.omit(data) 
 cor(a,b, use = "complete.obs")
+
+sum_na <- sum(is.na(activity$steps))
+
 
 
 #list 
@@ -89,6 +92,7 @@ rep(0:1, each = 50 )
 
 
 #filter(), filter the row 
+activity_clear <- filter(activity, !is.na(steps))
 
 
 #arrange()
@@ -106,6 +110,24 @@ state_data <- outcame[outcame$State == state, ]
 
 maxInt <- data[which.max(data$steps),]
 same as :max_steps <- data[which(data$steps == max(data$steps)),] 
+
+
+#match
+a <- data.frame(aa =c(1,2,3), bb = c(11,22,33)) 
+b <- data.frame(cc = c(NA, 1, NA), aa = c(1,2,3))
+b$aa <- factor(b$aa) 
+b$cc <- a$bb[match(b$aa,a$aa)]
+
+
+#transform + ifelse
+sum_na <- sum(is.na(activity$steps))
+activity_new <- transform(activity,
+                          steps= ifelse(is.na(activity$steps),
+                          data$steps[match(activity$interval,data$interval)],
+                          activity$steps)
+                          )
+                          
+ifelse : ifelse(T or F, T result, Fresult) 
 
 
 #subset $ normal 
