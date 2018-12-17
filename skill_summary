@@ -101,6 +101,7 @@ top_counts_sorted <- arrange(top_counts, desc(count))
 
 #mutate
 mutate(size_mb = size/ 2^20)
+activity_new <- mutate(activity_new, daytype = sapply(activity_new$date, dayInx))
 
 
 #which
