@@ -104,6 +104,9 @@ which(state_data[,11] == min(state_data[,11],na.rm = T))      #return the number
  
 state_data <- outcame[outcame$State == state, ]
 
+maxInt <- data[which.max(data$steps),]
+same as :max_steps <- data[which(data$steps == max(data$steps)),] 
+
 
 #subset $ normal 
 aa <- data.frame(a = 1:5,c =c("a","b","c","d","e"), b =c(21,23,444,1,20))
