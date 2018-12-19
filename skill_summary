@@ -39,7 +39,7 @@ allData <- numeric()
 comp <- data.frame(id=numeric(length(1:4)), nobs=numeric(length(1:4)))
 airquality <- transform(airquality, month = factor(month))
 
-#Obout NA 
+#about NA 
 mean(allData, na.rm=TRUE)
 data2 <- na.omit(data) 
 cor(a,b, use = "complete.obs")
@@ -363,7 +363,7 @@ flood|fire # any line has either of flood and fire.
 other 
 min <- .Machine$integer.max
 use chain %>% 
-data see 2.tidy day 
+date and how to tidy data see 2.tidy day 
 graphic see 3. explotary data  or lubridate package 
 color see  3. explotary data 
 
