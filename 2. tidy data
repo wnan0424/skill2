@@ -67,6 +67,7 @@ flood|fire # any line has either of flood and fire.
  
  3. about date 
 d1 <- Sys.Date()
+activity$date <- as.Date(activity$date, format = "%Y-%m-%d")
 
 format(d2, "%a %b %d") #formatting dates
 weekdays(d2)   #get "sunday"
