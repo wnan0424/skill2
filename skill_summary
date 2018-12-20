@@ -241,7 +241,11 @@ pack_sum <- summarize(by_package,count = n(),unique = n_distinct(ip_id),countrie
 bb <- group_by(activity_new, interval, daytype) #group by two indicates 
 cc <- summarise(bb, steps = mean(steps))
 
-quantile(pack_sum$count, probs = 0.99)
+group_by + summarise same as aggregate: 
+bb <- group_by(activity, date) 
+cc <- summarise(bb, steps = mean(steps))   ==  cc <- aggregate(steps ~ date, data = activity, mean)
+
+#quantile(pack_sum$count, probs = 0.99)
 
 View(top_counts)
 
