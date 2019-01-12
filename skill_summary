@@ -103,6 +103,8 @@ top_counts_sorted <- arrange(top_counts, desc(count))
 mutate(size_mb = size/ 2^20)
 activity_new <- mutate(activity_new, daytype = sapply(activity_new$date, dayInx))
 
+#add one column directly 
+data_economic$PROPDMGNUM = 0
 
 #which
 which(state_data[,11] == min(state_data[,11],na.rm = T))      #return the number of row of min 
@@ -296,6 +298,9 @@ index <- c(grep("^Hospital.*Death*", names(rates)))  # ^ means the first letter,
 
 
 #names and editing text 
+names(result_health)[1] <- "evtype"
+= names(result_health) = c("evtype", "damage")
+
 names(mortality_rates)[3:5] <- c("heart attack", "heart failure", "pneumonia")
  rename(CountryCode = "X", rankingGDP = "X.1", Long.Name = "X.3", gdp = "X.4")
 
